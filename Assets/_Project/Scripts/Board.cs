@@ -24,7 +24,7 @@ public class Board : MonoBehaviour
         CreateTileLogics();
         Debug.Log(Tiles.Count);
     }
-    [ContextMenu("Paint")]
+  
     public void PaintTile(Vector3Int position,Color color)
     {
         // tilemap.SetTile(position, redSquare);
