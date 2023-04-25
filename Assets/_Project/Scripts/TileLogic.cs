@@ -6,6 +6,10 @@ public class TileLogic
 {
     public Vector3Int Position;
     public Color Color;
-    public float Distance;
+    public float CostFromOrigin;
+    public float CostToObjective;
+    public float Score;
     public bool Occupied;
+    public int MoveCost;
+    public TileLogic Previous;
 }
