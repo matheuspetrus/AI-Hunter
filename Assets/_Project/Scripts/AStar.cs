@@ -34,7 +34,7 @@ public class AStar : Pathfinder
             for (int i = 0; i < Board.Directions.Length; i++)
             {
                 TileLogic next = Board.GetTile(current.Position + Board.Directions[i]);
-                yield return  new WaitForSeconds(0.05f);
+                yield return  new WaitForSeconds(0.01f);
                 interationCout++;
                 
                 if (next == null || next.CostFromOrigin<=current.CostFromOrigin+next.MoveCost)
@@ -55,11 +55,13 @@ public class AStar : Pathfinder
                     {
                         openSet.Add(next);
                     }
-                    
+                    tilesSearch.Add(next);
                     Board.Instance.PaintTile(next.Position,Color.yellow);
                 }
                 
             }
         }
+
+        isComplete = true;
     }
 }

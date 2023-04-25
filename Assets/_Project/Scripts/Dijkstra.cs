@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Dijkstra : Pathfinder
 {
+    List<Vector3Int> listPositions;
     protected override IEnumerator Search(TileLogic start)
     {
+        listPositions = new List<Vector3Int>();
         int interationCount = 0;
-        
+
         Board.Instance.ClearSearch();
        tilesSearch = new List<TileLogic>();
        
@@ -23,10 +25,12 @@ public class Dijkstra : Pathfinder
        {
            TileLogic current = CheckNow.Dequeue();
             Board.Instance.PaintTile(current.Position,Color.green);
+            listPositions.Add(current.Position);
+            
            for (int i = 0; i < Board.Directions.Length; i++)
            {
                TileLogic next = Board.GetTile(current.Position + Board.Directions[i]);
-               yield return  new WaitForSeconds(0.05f);
+               yield return  new WaitForSeconds(0.01f);
                interationCount++;
                if (next == null || next.CostFromOrigin<=current.CostFromOrigin+next.MoveCost)
                {
@@ -42,7 +46,7 @@ public class Dijkstra : Pathfinder
                    {
                        CheckNext.Enqueue(next);
                    }
-                  
+                   tilesSearch.Add(next);
                    Board.Instance.PaintTile(next.Position,Color.yellow);
                }
            }
@@ -52,6 +56,10 @@ public class Dijkstra : Pathfinder
                SwapReference(ref CheckNow, ref CheckNext);
            }
        }
+       isComplete = true;
+
+       ObjectivePosition = listPositions[Random.Range(0, listPositions.Count)];
+       
        Debug.Log("interationCount: "+interationCount);
      
     }

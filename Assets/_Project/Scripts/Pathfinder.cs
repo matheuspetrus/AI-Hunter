@@ -12,14 +12,18 @@ public abstract class Pathfinder : MonoBehaviour
 
     protected List<TileLogic> tilesSearch;
 
+
+    public bool isComplete;
+
+    private List<TileLogic> path;
     [ContextMenu("Print Path")]
-    void TriggerPrintPath()
+    public void TriggerPrintPath()
     {
         TileLogic objective = Board.GetTile(ObjectivePosition);
-
+        Debug.Log("Objective : "+objective);
         if (tilesSearch.Contains(objective))
         {
-            List<TileLogic> path = BuildPath(objective);
+            path = BuildPath(objective);
             PrintPath(path);
         }
         else
@@ -52,10 +56,15 @@ public abstract class Pathfinder : MonoBehaviour
         }
     }
 
+    public List<TileLogic> GetPath()
+    {
+        return path;
+    }
     [ContextMenu("TriggerSearch")]
     // Start is called before the first frame update
-    void TriggerSearch()
+    public void TriggerSearch()
     {
+        isComplete = false;
         StartCoroutine(Search(Board.GetTile(InitialPosition)));
     }
 
