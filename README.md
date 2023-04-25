@@ -35,3 +35,7 @@ A IA do coelho é bem simples, pois ele inicia em um estado de busca e mapeament
 ![Imagem1](/ArquivosReadme/Screenshot_15.png?raw=true)
 
 para fazê-l funcionar basta incorporar em um game object o scritp Hunting, Dijkistra e A* e definir os parâmetros conforme a sua necessidade. Você também deve dar a regência dela para o gerenciador de turnos que deve estar na cena.
+
+
+Link Download Build:
+https://drive.google.com/file/d/1wi8HrS6D_XTmhkPtY86wNzAdHfJqUxtA/view?usp=share_link
