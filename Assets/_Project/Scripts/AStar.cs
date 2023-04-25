@@ -34,7 +34,7 @@ public class AStar : Pathfinder
             for (int i = 0; i < Board.Directions.Length; i++)
             {
                 TileLogic next = Board.GetTile(current.Position + Board.Directions[i]);
-                yield return  new WaitForSeconds(0.01f);
+                yield return  new WaitForSeconds(0.001f);
                 interationCout++;
                 
                 if (next == null || next.CostFromOrigin<=current.CostFromOrigin+next.MoveCost)

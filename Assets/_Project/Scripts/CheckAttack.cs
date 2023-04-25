@@ -1,18 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Hunter hunter;
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.gameObject.CompareTag("Hunting"))
+        {
+           hunter.StartAttack();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        
+        if (other.gameObject.CompareTag("Hunting"))
+        {
+            hunter.StopAttack();
+        }
     }
 }

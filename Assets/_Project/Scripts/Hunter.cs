@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 
 public class Hunter : MonoBehaviour
 {
+    public TMP_Text statesHunter;
     public Vector3Int position;
     public GameObject Target;
     public AStar aStar;
@@ -36,8 +38,14 @@ public class Hunter : MonoBehaviour
         {
             case States.Spin:
 
-                path.Clear();
-                path = null;
+                statesHunter.text ="Current State: "+ States.Spin.ToString();
+                
+                if (path!=null)
+                {
+                    path.Clear();
+                    path = null;
+                }
+                
              
                 aStar.isComplete = false;
                 
@@ -50,10 +58,19 @@ public class Hunter : MonoBehaviour
 
                 break;
             case States.Attacking:
-                print ("Hello and good day!");
+                
+                statesHunter.text ="Current State: "+ States.Attacking.ToString();
+                Destroy(Target);
+                path.Clear();
+                path = null;
+                Target = null;
+                aStar.isComplete = false;
+                state = States.Search;
+                
                 break;
             case States.Following:
                 
+                statesHunter.text ="Current State: "+ States.Following.ToString();
 
                 if (path != null)
                 {
@@ -98,6 +115,8 @@ public class Hunter : MonoBehaviour
                 
             case States.Search:
 
+                statesHunter.text = "Current State: "+States.Search.ToString();
+                
                 if (path != null)
                 {
                     Debug.Log($"path[{path.Count - 1}]");
@@ -143,6 +162,7 @@ public class Hunter : MonoBehaviour
 
                 break;
             default:
+                statesHunter.text ="Current State: "+ "Default";
                 print ("Incorrect intelligence level.");
                 break;
         }
@@ -164,5 +184,14 @@ public class Hunter : MonoBehaviour
             Target = null;
             state = States.Search;
         }
+    }
+
+    public void StartAttack()
+    {
+        state = States.Attacking;
+    }
+    public void StopAttack()
+    {
+        state = States.Search;
     }
 }
