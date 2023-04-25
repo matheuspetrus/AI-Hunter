@@ -38,4 +38,4 @@ para fazê-l funcionar basta incorporar em um game object o scritp Hunting, Dijk
 
 
 Link Download Build:
-https://drive.google.com/file/d/1wi8HrS6D_XTmhkPtY86wNzAdHfJqUxtA/view?usp=share_link
+https://drive.google.com/file/d/1GGqkO-d6_N6PW-JRjhYFMDBlvBP7LLWp/view?usp=share_link
