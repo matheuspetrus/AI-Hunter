@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6929304801960285749}
-  - component: {fileID: 6929304801960285751}
   - component: {fileID: 6929304801960285748}
+  - component: {fileID: 6929304801960285751}
   - component: {fileID: 6929304801960285750}
   m_Layer: 0
   m_Name: Area Attack
@@ -34,6 +34,19 @@ Transform:
   m_Father: {fileID: 6929304802611536073}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6929304801960285748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929304801960285738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec9404be00d5e24189a5fefcbb5705e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hunter: {fileID: 6929304802611536078}
 --- !u!58 &6929304801960285751
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -50,19 +63,6 @@ CircleCollider2D:
   m_Offset: {x: 0.5, y: 0.5}
   serializedVersion: 2
   m_Radius: 1.5
---- !u!114 &6929304801960285748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6929304801960285738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec9404be00d5e24189a5fefcbb5705e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hunter: {fileID: 6929304802611536078}
 --- !u!50 &6929304801960285750
 Rigidbody2D:
   serializedVersion: 4
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05002db2bb657064d91e2958efe350b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statesHunter: {fileID: 0}
   position: {x: 0, y: 0, z: 0}
   Target: {fileID: 0}
   aStar: {fileID: 6929304802611536079}
@@ -237,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialPosition: {x: 0, y: 0, z: 0}
   ObjectivePosition: {x: 0, y: 0, z: 0}
-  SearchLength: 50
+  SearchLength: 30
   isComplete: 0
   heuristicWeight: 2
 --- !u!114 &6929304802611536076

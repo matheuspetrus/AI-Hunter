@@ -15,21 +15,19 @@ public class Hunting : MonoBehaviour
 
     public void SetInitialPosition()
     {
-        position = new Vector3Int((int)transform.position.x,(int)transform.position.y,(int)transform.position.z);
-        dijkstra.InitialPosition = position;
+        // position = new Vector3Int((int)transform.position.x,(int)transform.position.y,(int)transform.position.z);
+        // dijkstra.InitialPosition = position;
     }
 
     [ContextMenu("StartTurn")]
     public void StartTurn()
     {
-       
+        Debug.Log("StartTurn Hunting");
         dijkstra.InitialPosition = position;
-       
-
-        
         if (path != null)
         {
-            Debug.Log($"path[{path.Count - 1}]");
+                    
+            Debug.Log(path.Count);
                     
             if (path.Count - 1== -1)
             {
@@ -37,15 +35,12 @@ public class Hunting : MonoBehaviour
                 path.Clear();
                 path = null;
                 dijkstra.isComplete = false;
-                //state = States.Spin;
+                        
+                dijkstra.TriggerSearch();
             }
             else
             {
-                position = path[0].Position;
-                transform.position = position;
-                path.RemoveAt(0);
-                        
-                Debug.Log("!=");
+                Move();
             }
         }
         else
@@ -57,17 +52,25 @@ public class Hunting : MonoBehaviour
                 path= new List<TileLogic>();
                 path = dijkstra.GetPath();
                         
+                Move();
                         
-                position = path[0].Position;
-                transform.position = position;
-                path.RemoveAt(0);
-                        
-                Debug.Log(path);
+                // Debug.Log(path);
             }
             else
             {
                 dijkstra.TriggerSearch();
             }
+        }
+        
+    }
+    void Move()
+    {
+        Debug.Log("Move");
+        if (path!=null && path.Count>=1)
+        {
+            position = path[0].Position;
+            transform.position = position;
+            path.RemoveAt(0); 
         }
     }
 }

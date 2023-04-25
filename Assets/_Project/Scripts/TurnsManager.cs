@@ -6,7 +6,7 @@ using UnityEngine;
 public class TurnsManager : MonoBehaviour
 {
     public List<GameObject> huntings;
-    public Hunter hunter;
+    public GameObject hunter;
 
     public bool isAutoTurn;
 
@@ -24,15 +24,30 @@ public class TurnsManager : MonoBehaviour
         {
             if ( huntings[i]!=null || !huntings[i].Equals(null))
             {
-                huntings[i].GetComponent<Hunting>().StartTurn();
+                StartCoroutine(Turn(huntings[i]));
+               
             }
         }
         
-        hunter.GetComponent<Hunter>().StartTurn();
+        StartCoroutine(Turn(hunter));
+       
         turnsCount++;
         turnsCountText.text = turnsCount.ToString();
     }
 
+    IEnumerator Turn(GameObject obj)
+    {
+        if (obj.GetComponent<Hunting>())
+        {
+            obj.GetComponent<Hunting>().StartTurn();
+            yield return new WaitForSeconds(1f);
+        }
+        if (obj.GetComponent<Hunter>())
+        {
+            obj.GetComponent<Hunter>().StartTurn();
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     void AutoTurn()
     {

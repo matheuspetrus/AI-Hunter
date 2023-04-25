@@ -20,7 +20,7 @@ public abstract class Pathfinder : MonoBehaviour
     public void TriggerPrintPath()
     {
         TileLogic objective = Board.GetTile(ObjectivePosition);
-        Debug.Log("Objective : "+objective);
+       /// Debug.Log("Objective : "+objective);
         if (tilesSearch.Contains(objective))
         {
             path = BuildPath(objective);

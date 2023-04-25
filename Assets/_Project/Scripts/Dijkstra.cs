@@ -2,11 +2,81 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dijkstra : Pathfinder
+public class Dijkstra : MonoBehaviour
 {
-    List<Vector3Int> listPositions;
-    protected override IEnumerator Search(TileLogic start)
+    
+    public Vector3Int InitialPosition;
+
+    public Vector3Int ObjectivePosition;
+    
+    public int SearchLength;
+
+    protected List<TileLogic> tilesSearch;
+
+
+    public bool isComplete;
+
+    
+    
+    private List<TileLogic> path;
+    [ContextMenu("Print Path")]
+    public void TriggerPrintPath()
     {
+        TileLogic objective = Board.GetTile(ObjectivePosition);
+        /// Debug.Log("Objective : "+objective);
+        if (tilesSearch.Contains(objective))
+        {
+            path = BuildPath(objective);
+            PrintPath(path);
+        }
+        else
+        {
+            Debug.Log("Objective not found");
+        }
+
+    }
+
+     //IEnumerator Search(TileLogic start);
+    private List<TileLogic> BuildPath(TileLogic lastTile)
+    {
+        List<TileLogic>path = new List<TileLogic>();
+        TileLogic temp = lastTile;
+        while (temp.Previous != null)
+        {
+            path.Add(temp);
+            temp = temp.Previous;
+        }
+        path.Add(temp);
+        path.Reverse();
+        return path;
+    }
+
+    private void PrintPath(List<TileLogic> path)
+    {
+        foreach (TileLogic t in path)
+        {
+            Debug.Log(t.Position);
+        }
+    }
+
+    public List<TileLogic> GetPath()
+    {
+        return path;
+    }
+    [ContextMenu("TriggerSearch")]
+    // Start is called before the first frame update
+    public void TriggerSearch()
+    {
+        isComplete = false;
+        StartCoroutine(Search(Board.GetTile(InitialPosition)));
+    }
+
+    
+    
+    List<Vector3Int> listPositions;
+    IEnumerator Search(TileLogic start)
+    {
+
         listPositions = new List<Vector3Int>();
         int interationCount = 0;
 
@@ -60,7 +130,7 @@ public class Dijkstra : Pathfinder
 
        ObjectivePosition = listPositions[Random.Range(0, listPositions.Count)];
        
-       Debug.Log("interationCount: "+interationCount);
+      // Debug.Log("interationCount: "+interationCount);
      
     }
 

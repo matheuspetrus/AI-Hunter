@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialPosition: {x: 0, y: 0, z: 0}
   ObjectivePosition: {x: 0, y: 0, z: 0}
-  SearchLength: 5
+  SearchLength: 3
   isComplete: 0
 --- !u!58 &1407943809910405444
 CircleCollider2D:
@@ -160,7 +160,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.5, y: 0.5}

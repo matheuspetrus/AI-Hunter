@@ -61,34 +61,31 @@ public class Hunter : MonoBehaviour
                 
                 statesHunter.text ="Current State: "+ States.Attacking.ToString();
                 Destroy(Target);
-                path.Clear();
+                //path.Clear();
                 path = null;
-                Target = null;
+                //Target = null;
                 aStar.isComplete = false;
+                dijkstra.isComplete = false;
                 state = States.Search;
                 
                 break;
             case States.Following:
                 
                 statesHunter.text ="Current State: "+ States.Following.ToString();
-
                 if (path != null)
                 {
-                    Debug.Log($"path[{path.Count - 1}]");
+                    
+                    Debug.Log(path.Count);
                     
                     if (path.Count - 1== 0)
                     {
                         Debug.Log("==");
-                   
+
                         state = States.Spin;
                     }
                     else
                     {
-                        position = path[0].Position;
-                        transform.position = position;
-                        path.RemoveAt(0);
-                        
-                        Debug.Log("!=");
+                        Move();
                     }
                 }
                 else
@@ -100,15 +97,16 @@ public class Hunter : MonoBehaviour
                         path= new List<TileLogic>();
                         path = aStar.GetPath();
                         
-                        Debug.Log(path);
+                        Move();
+                        
+                        // Debug.Log(path);
                     }
                     else
                     {
                         aStar.TriggerSearch();
                     }
-                  
-                 
                 }
+
 
               
                 break;
@@ -119,7 +117,8 @@ public class Hunter : MonoBehaviour
                 
                 if (path != null)
                 {
-                    Debug.Log($"path[{path.Count - 1}]");
+                    
+                    Debug.Log(path.Count);
                     
                     if (path.Count - 1== -1)
                     {
@@ -127,15 +126,12 @@ public class Hunter : MonoBehaviour
                         path.Clear();
                         path = null;
                         dijkstra.isComplete = false;
-                        //state = States.Spin;
+                        
+                        dijkstra.TriggerSearch();
                     }
                     else
                     {
-                        position = path[0].Position;
-                        transform.position = position;
-                        path.RemoveAt(0);
-                        
-                        Debug.Log("!=");
+                        Move();
                     }
                 }
                 else
@@ -147,12 +143,9 @@ public class Hunter : MonoBehaviour
                         path= new List<TileLogic>();
                         path = dijkstra.GetPath();
                         
+                        Move();
                         
-                        position = path[0].Position;
-                        transform.position = position;
-                        path.RemoveAt(0);
-                        
-                        Debug.Log(path);
+                       // Debug.Log(path);
                     }
                     else
                     {
@@ -193,5 +186,17 @@ public class Hunter : MonoBehaviour
     public void StopAttack()
     {
         state = States.Search;
+    }
+
+    void Move()
+    {
+        Debug.Log("Move");
+        if (path.Count>=1)
+        {
+            position = path[0].Position;
+            transform.position = position;
+            path.RemoveAt(0); 
+        }
+       
     }
 }
