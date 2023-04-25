@@ -28,7 +28,7 @@ Os comandos da direita são bem simples:
 A IA da Vaquinha é muito simples, ela usa um algoritmo Dijkstra para mapear ao seu redor e selecionar uma direção para onde ir. E ela fica nesse loop.
 para fazê-la funcionar basta incorporar em um game object o scritp Hunting e Dijkistra e definir os parâmetros conforme a sua necessidade. Você também deve dar a regência dela para o gerenciador de turnos que deve estar na cena.
 
-![Imagem1](/ArquivosReadme/IACoelho.jpg?raw=true)
+![Imagem1](/ArquivosReadme/IACoelho2.jpg?raw=true)
 
 A IA do coelho é bem simples, pois ele inicia em um estado de busca e mapeamento usando o algoritmo Dijkstra, quando uma vaquinha entra no raio de alcance dele, ele passa para o estado de  variação de caminho para o seu alvo, e então usando o algoritmo A* ele define seu trajeto, após isso ele entra no estado de perseguição onde ele avança ate o seu alvo e quando chega perto o suficiente ele muda de estado, indo para o estado de atacar, e ao terminar o ataque ele retorna para o estado de busca.
 
