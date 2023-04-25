@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -35,6 +36,10 @@ public class Hunter : MonoBehaviour
         {
             case States.Spin:
 
+                path.Clear();
+                path = null;
+             
+                aStar.isComplete = false;
                 
                 aStar.ObjectivePosition = new Vector3Int((int) Target.transform.position.x, 
                     (int) Target.transform.position.y, (int) Target.transform.position.z);
@@ -57,9 +62,7 @@ public class Hunter : MonoBehaviour
                     if (path.Count - 1== 0)
                     {
                         Debug.Log("==");
-                        path.Clear();
-                        path = null;
-                        aStar.isComplete = false;
+                   
                         state = States.Spin;
                     }
                     else
@@ -99,7 +102,7 @@ public class Hunter : MonoBehaviour
                 {
                     Debug.Log($"path[{path.Count - 1}]");
                     
-                    if (path.Count - 1== 0)
+                    if (path.Count - 1== -1)
                     {
                         Debug.Log("==");
                         path.Clear();
@@ -125,6 +128,11 @@ public class Hunter : MonoBehaviour
                         path= new List<TileLogic>();
                         path = dijkstra.GetPath();
                         
+                        
+                        position = path[0].Position;
+                        transform.position = position;
+                        path.RemoveAt(0);
+                        
                         Debug.Log(path);
                     }
                     else
@@ -139,5 +147,22 @@ public class Hunter : MonoBehaviour
                 break;
         }
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("Hunting"))
+        {
+            Target = other.gameObject;
+            state = States.Spin;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("Hunting"))
+        {
+            Target = null;
+            state = States.Search;
+        }
     }
 }
